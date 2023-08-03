@@ -242,12 +242,12 @@ def main():
 
     parser.add_argument("--do_train", default=0, type=int)
     parser.add_argument("--eval_data_file",
-                        default= ROOT_PATH + '/datasets/' + TYPE + '/' + TYPE + '-oversamp.txt',
+                        default= ROOT_PATH + '/data/' + TYPE + '/' + TYPE + '-oversamp.txt',
                         type=str,
                         help="eval data file")
     parser.add_argument("--train_data_file",
 
-                        default= ROOT_PATH + '/datasets/' + TYPE + '/' + TYPE + '-oversamp.txt',
+                        default= ROOT_PATH + '/data/' + TYPE + '/' + TYPE + '-oversamp.txt',
                         type=str,
                         help="train data file")
     args = parser.parse_args()
