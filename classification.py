@@ -225,8 +225,8 @@ def evaluate(args, model, tokenizer, eval_when_training=False):
         "eval_precision": float(precision),
         "eval_f1": float(f1),
     }
-    checkpoint_prefix = 'saved_models' + TYPE
-    output_dir = os.path.join(args.output_dir, '{}'.format(checkpoint_prefix))
+
+    output_dir = args.output_dir
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     model_to_save = model.module if hasattr(model, 'module') else model
