@@ -155,9 +155,9 @@ def get_distance(args, model, tokenizer, eval_when_training=False):
 
 
 def main():
-    with open(ROOT_PATH  + '/' + TYPE + '-bugs.txt', 'r') as f:
-        for eachLine in f:
-            bug.append(eachLine.strip())
+
+
+  
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--do_train", default=0, type=int)
