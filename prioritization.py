@@ -115,7 +115,7 @@ if __name__ == '__main__':
     for epoch in tqdm(range(20)):
         times += 1
         ans = []
-        a, b, c, d, e = fpf('distances/' + TYPE + '/'+TYPE+'-w.npy', epoch)
+        a, b, c, d, e = fpf('distances/' + TYPE + '/BLADE.npy', epoch)
         ans.append(b)
         x[0] += d
         a, b, c, d, e = fpf('distances/' + TYPE + '/tamer.npy', epoch)

@@ -11,7 +11,7 @@ from transformers import (AdamW, get_linear_schedule_with_warmup,RobertaConfig, 
 from tqdm import tqdm
 from model import Model
 import sys
-ROOT_PATH = '/data/fanxingyu/deduplication/'
+ROOT_PATH = '/data/xxx/deduplication/'
 def put_file_content(path, content):
     f = open(path, 'a+')
     f.write(content)
@@ -33,7 +33,7 @@ bug = []
 name2id = {}
 id2name = {}
 
-with open(ROOT_PATH + 'drawing/data/' + TYPE + '/names', 'r') as f:
+with open(ROOT_PATH + '/data/' + TYPE + '/names', 'r') as f:
     for index, line in enumerate(f):
         name = line.strip().split('/')[-1].split('.')[0]
         name2id[name] = index

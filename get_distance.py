@@ -12,7 +12,7 @@ from tqdm import tqdm
 from model import Model
 import matplotlib.pyplot as plt
 import sys
-ROOT_PATH = '/data/fanxingyu/deduplication/'
+ROOT_PATH = '/data/xxx/deduplication/'
 def put_file_content(path, content):
     f = open(path, 'a+')
     f.write(content)
@@ -32,7 +32,7 @@ bug = []
 name2id = {}
 id2name = {}
 
-with open(ROOT_PATH + 'drawing/data/' + TYPE + '/names', 'r') as f:
+with open(ROOT_PATH + '/data/' + TYPE + '/names', 'r') as f:
     for index, line in enumerate(f):
         name = line.strip().split('/')[-1].split('.')[0]
         name2id[name] = index
@@ -47,69 +47,7 @@ miss_id = []
 for i in miss[TYPE]:
     miss_id.append(name2id[i])
 
-def fpf(ll, start): 
-    res = [] # result
-    dis = [] # the distance to main set
-    vis = set() # has been visited
-    bugset = set() # the size of bug found
-    score = 0
-    lenll = len(ll)
-    vis.add(start)
-    for i in miss_id:
-        vis.add(i)
-    area = 0.0
-    bugset.add(bug[start])
-    # print(bug[start])
-    bugs = []
-    resx = []
-    bugs.append(bug[start])
-    res.append(1)
-    resx.append(1)
-    area += 1
-    for i in range(lenll):
-        dis.append(ll[start][i])
-    lenvis = len(vis)
-    for i in range(lenll-lenvis):
-        maxxnum = 1e9
-        maxxdis = -1e9
-        for j in range(lenll):
-            if j not in vis and dis[j] > maxxdis:
-                maxxnum = j 
-                maxxdis = dis[j]
 
-        vis.add(maxxnum)
-        if bug[maxxnum] not in bugset:
-            bugs.append(bug[maxxnum])
-            resx.append(i + 2)
-        bugset.add(bug[maxxnum])
-        res.append(len(bugset))
-        if i < 100:
-            score += maxxdis
-        area += len(bugset)
-        for j in range(lenll):
-            dis[j] = min(dis[j], ll[maxxnum][j])
-    apfd = APFD(res)
-    return apfd, res.copy(), area, np.array(resx)
-
-def APFD(res):
-    n = len(res)
-    if TYPE == 'gcc430':
-        m = 29
-    elif TYPE == 'gcc440':
-        m = 20
-    elif TYPE == 'gcc450':
-        m = 7
-    else:
-        m = 6
-    tf = 1.0
-    print(m)
-    for i in range(len(res)):
-        if i and res[i] > res[i-1]:
-            # print(i)
-            tf += i + 1 
-    ans = 1.0 - tf/float(n*m) + 1.0/2/n
-  
-    return ans
 class InputFeatures(object):
     """A single training/test features for a example."""
 
