@@ -1,5 +1,5 @@
 # De-duplication
-This is the implementation of Black-box De-duplication of Silent Compiler Bugs via Deep Semantic Analysis
+This is the implementation of BLADE (Black-box De-duplication of Silent Compiler Bugs via Deep Semantic Analysis)
 # Data Preparation
 We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) 
 # Code Representation and Classification
