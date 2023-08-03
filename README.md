@@ -11,6 +11,6 @@ Run get_distance.py to get the distance matrix
 
 In directory 'distances', you can find the distance matrixs on four datasets and calculcated by five techniques : 'BLADE', 'Tamer', 'Trans', 'D3', 'D3-prog'
 # Prioritization
-run prioritization.py to get the final result
+Run prioritization.py to get the final result
 
 The results figures will be saved and you can check it.
