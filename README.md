@@ -13,4 +13,4 @@ In directory 'distances', you can find the distance matrixs on four datasets and
 # Prioritization
 run prioritization.py to get the final result
 
-The jpg will be saved and you can check it.
+The results figures will be saved and you can check it.
