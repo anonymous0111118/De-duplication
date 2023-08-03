@@ -17,10 +17,10 @@ def put_file_content(path, content):
     f.write(content)
     f.flush()
     f.close()
-xianka = {'gcc430':'4', 'gcc440':'5', 'gcc450':'6', 'llvm280': '7'}
+gpunumber = {'gcc430':'4', 'gcc440':'5', 'gcc450':'6', 'llvm280': '7'}
 
 TYPE = 'gcc430'
-os.environ['CUDA_VISIBLE_DEVICES'] = xianka[TYPE]
+os.environ['CUDA_VISIBLE_DEVICES'] = gpunumber[TYPE]
 LOG_FILE = ROOT_PATH + 'logs/' + TYPE + '.log'
 put_file_content(LOG_FILE, 'logging' + '\n')
 MODEL_CLASSES = {
