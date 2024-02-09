@@ -37,7 +37,10 @@ After our **manual analysis**, this example revealed a compiler bug caused by
 
 The root cause of this bug is that under the -O2 optimization level, after cross-assignment of structure type objects *a* and *b* with two member variables, line 5 was incorrectly optimized out.
 
-The heatmap diagram of **attention** illustrates the definition of the structure and highlights the differing initial values of the second member variable, *d*, within the global variables *a* and *b*. Since *a* does not provide an initial value, the model can only enhance attention when defining *a*. The cross assignment statement on lines 05 and 06, along with the final output statement for *b.d*, collectively contribute to triggering the semantics of this bug and attract the attention of the model. Surprisingly, in this example, the attention mechanism precisely recognizes the second value as the point of differentiation between variables *a* and *b* (indicated by the red 1 on line 02). This demonstrates the model's ability to accurately identify the crucial aspects of the code and highlight the relevant information for analysis.
+The heatmap diagram of **attention** illustrates:
+1. The model notices that a certain structure type had two member variables when it was defined. (line XX)
+2. Immediately afterwards, the model finds that when *a* and *b* are initialized, the values of the second member variables were not equal. ( the *0* is black but *1* is red in *{0,1}* in line XX). 
+3. The model pays close attention to the cross assignment operation between *a* and *b*.
 
 This example demonstrates the alignment between attention and the results of manual analysis, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
 
