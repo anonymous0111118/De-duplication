@@ -30,6 +30,6 @@ After our **manual analysis**, this example triggered a compiler bug because of 
 
 The heatmap diagram of **attention** shows that the structure is defined, and the initial value of the second member variable d of global variables a and b is different (since a does not give any initial value, the model can only enhance the attention when defining a), The additional assignment statement in line 06 and the final output statement for b.d together constitute the triggering semantics of this bug.
 
-In this example, attention is consistent with the results of manual analysis, proving that the error-causing semantics extracted by BLADE is effective.
+In this example, attention is consistent with the results of manual analysis, proving that the failure-relevant semantics extracted by BLADE is effective.
 
 * Case No.2
