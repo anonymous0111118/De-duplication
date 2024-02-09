@@ -57,6 +57,7 @@ Furthermore, by examining the heatmap of **attention**, it becomes evident that 
 
 * Case No.3
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
+
 First of all, for ease to understand, there is a prerequisite knowledge：In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*.
 
 Based on our **manual analysis** of this example, we have observed about the failure-relvant semantics the following:  
