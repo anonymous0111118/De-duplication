@@ -65,6 +65,7 @@ On the heatmap of **attention** changes, we can clearly find that the model pays
 
 * Case No.5 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
+
 This example triggered the same bug as case 4. After **manual analysis**, they found that the root cause of the bug was also the same.
 
 Although this program lacks the expression of conditional statements, it is logically the same as case 4. The model's **attention** change for this example is very similar to the case4, and in this process, it only pays attention to char and const char definitions and also comparisons between them, but does not pay special attention to the expression of if-expressions in case4, which shows that the model accurately discovered the true failure-relevant semantics of this set of examples.
