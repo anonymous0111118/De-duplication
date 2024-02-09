@@ -60,10 +60,23 @@ Furthermore, by examining the heatmap of **attention**, it becomes evident that 
 First of all, for ease to understand, there is a prerequisite knowledge：In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*.
 
 Based on our **manual analysis** of this example, we have observed about the failure-relvant semantics the following:  
-1. 
-Therefore, in the *if-statement*, the value of *b* should be *-1*. However, when *b* is defined as *const*, under the optimization level of -O2, it is compared with *c* as an integer with a wrong value of 255. This inconsistency leads to an incorrect output.
+1. There's a global variable *a*.
+2. An unsigned char type variable *b* is declared and given a value *254* (which is greater than *127* and when it is compared to a char variable it should be converted to *254 - 266 = -2*).
+3. A char type variable *c*.
+4. At least one of *b* and *c* is *const*.
+5. *b* is compared to *c* and in -O2 optimization level, the value of *b* isn't correctly coverted to *-2* but still *254*.
+6. The camparasion result is assigned to *a*.
 
-Regarding the heatmap changes in **attention**, it is evident that the model increasingly focuses on the definitions of *c* and *b*. In the *if-statement*, the model pays growing attention to the variables *c* and *b*. There, the model's comprehension of the distinct types involved suggests its recognition of the existence of type conversion operations, thereby capturing failure-relevant semantics.
+Regarding the heatmap changes in **attention**, it is evident that:
+1. The model discovered the declaration of *a*, but did not pay attention to its type.( *int* is black but *a* is red in line 01)
+2. The model focuses on the whole declaration statement of *b*, including its type and the initial value assigned to it *254*, which is likely to indicate that the model has noticed the semantics that b is greater than 127. (line 02)
+3. The model finds the declaration of *c* but ignores its initial value. Combining the previous line, it can be seen that the model knows this semantics, that is, it only needs to consider whether the assignment of the unsigned char type is greater than *127*. (black *0* in line 03) (red *254* in line 02)
+4. The model focuses on *const*. (line 03)
+5. The model pays more attention to the execution of the *d* function with a comparison between *b* and *c*. (line 07)
+6. Through the red *= e*, model knows the comparision result of *b* and *c* is assigned to the gloval variable *a* in function *d*. (line 04)
+
+
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are when comparing an unsigned char type variable exceeding 127 with another char type variable, adding at least one of them as const, results differently in different optimization levels, which shows the alignment between attention and the results of manual analysis, thereby demonstrating the effectiveness of the failure-relevant semantics extracted by BLADE.
 
 
 * Case No.4
@@ -71,7 +84,7 @@ Regarding the heatmap changes in **attention**, it is evident that the model inc
 
 After conducting a thorough **manual analysis**, it was determined that this example encountered the same bug as case 3, with the root cause being identical.
 
-Despite the absence of *if-statements* in this program, its logical structure aligns with that of case 3. Remarkably, the **attention** pattern exhibited by the model for this example closely resembles that of case 3. The model primarily focuses on the definitions and comparisons involving *char* and *const char*, without placing significant emphasis on the *if-expression* present in case 3. This demonstrates the model's accurate identification of the genuine failure-relevant semantics within this set of examples.
+Despite the *if-statements* in this program, its logical structure aligns with that of case 3. The model doesn't pay much attention to the *if-statement*. It primarily focuses on the definitions and comparisons involving *char* and *const unsigned char* and the value of *unsigned char*. This demonstrates the model's accurate identification of the genuine failure-relevant semantics within this set of examples.
 
 
 * Case No.5
