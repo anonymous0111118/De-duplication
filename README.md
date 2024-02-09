@@ -27,9 +27,9 @@ But we manually analyzed some cases to demonstrate the accuracy.
   
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/a8edf745-f992-4197-9843-5e8756e3745a" alt="Case 1" width="300" height="300">
 
-After our **manual analysis**, this example triggered a compiler bug because of the way the structure is defined (two integer member variables) and the different initial values of a and b global variables. Through cross-copying in the main function, due to 06 The assignment statement line b=b is meaningless, but it triggers the compiler's optimization, and only this line is retained in the consecutive assignment statements, and is finally shown through the print function of b.d.
+After our **manual analysis**, this example triggered a compiler bug because of the way the structure is defined (two integer member variables) and the different initial values of a and b global variables. Through cross-copying in the main function, due to line 05 & 06 The assignment statement line b=b is meaningless, but it triggers the compiler's optimization, and only this line is retained in the consecutive assignment statements, and is finally shown through the print function of b.d.
 
-The heatmap diagram of **attention** shows that the structure is defined, and the initial value of the second member variable d of global variables a and b is different (since a does not give any initial value, the model can only enhance the attention when defining a), The additional assignment statement in line 06 and the final output statement for b.d together constitute the triggering semantics of this bug.
+The heatmap diagram of **attention** shows that the structure is defined, and the initial value of the second member variable d of global variables a and b is different (since a does not give any initial value, the model can only enhance the attention when defining a), The cross assignment statement in line 05 & 06 and the final output statement for b.d together constitute the triggering semantics of this bug.
 
 In this example, attention is consistent with the results of manual analysis, proving that the failure-relevant semantics extracted by BLADE is effective.
 
