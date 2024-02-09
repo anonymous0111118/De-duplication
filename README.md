@@ -101,7 +101,11 @@ Let's analyze a more complex example. After conducting a thorough **manual analy
 
 We can read the heat map of *attention* changed and find:
 1. The model discovers the declaration of *a*, *b*, pointer *d*, and the point *c*'s type *char*. (line 01 ~ 03)
-2. In the first block, the model pays only attention to the value changed in the address d points but ignores other things. (black *f* in line 06 & 07) 
+2. In the first block, the model pays only attention to the value changed in the address d points but ignores other things. (black *f* in line 06 & 07)
+3. The model pays great attentions to the whole declation statement of *char g*. (all red in line 10. This may illustrate the model finds there the value of *g* given differently in different optimization levels. And it is *g*'s value which finally influences the output.)
+4. The model finds some other assignment statements which are one part of reasons to trigger the optimization (like *g*'s address will be used in line 13, and global char pointer *e*'s value can be possibly changed.) or directly influence the final output (line 14).
+
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are one *char* type variable without a initial value occupies the global pointer's address which points another modified value. These are highly coincident with our manual analysis, proving that the model's ability to explain failure-relevant is excellent.
 
 
 **tips**
