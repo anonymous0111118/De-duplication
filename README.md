@@ -36,13 +36,17 @@ In this example, attention is consistent with the results of manual analysis, pr
 * Case No.2
 
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 1" width="500" height="500">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
 In this example, after our **manual analysis**, due to the assignment of the global pointer d in lines 05-08, the integer value at the address pointed to by d is 1. When g is declared in the tenth line, the address is given to g, so that the initial integer value of g is 1, which is manifested through subsequent assignment errors.
 
-In the heatmap changed by attention, we can see that in the main function, the model pays great attention to assignment statements. For integer assignments that have an impact on the output results, such as lines 6 and 14, the model pays special attention to the specific values on the right side. The specific assignment model of line 12 that has no impact on the results is not paid attention to. At the same time, we found that the main reason why this bug was triggered was the difference in the initial value of char g at different optimization levels in line 10. This feature was accurately captured by the model. Therefore, in this example, the model The explanation of failure-relevant semantics is quite correct.
+In the heatmap changed by **attention**, we can see that in the main function, the model pays great attention to assignment statements. For integer assignments that have an impact on the output results, such as lines 6 and 14, the model pays special attention to the specific values on the right side. The specific assignment model of line 12 that has no impact on the results is not paid attention to. At the same time, we found that the main reason why this bug was triggered was the difference in the initial value of char g at different optimization levels in line 10. This feature was accurately captured by the model. Therefore, in this example, the model The explanation of failure-relevant semantics is quite correct.
 
 
 * Case No.3
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 1" width="300" height="300">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 3" width="300" height="300">
+
+This example triggered the same bug as case 1. After **manual analysis**, they found that the root cause of the bug was also the same.
+
+In addition, we can see from the heatmap of **attention** that the model pays the same attention to it as it does to case 1.
