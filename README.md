@@ -53,7 +53,7 @@ In addition, we can see from the heatmap of **attention** that the model pays th
 
 
 
-Our **manual analysis** of this example is as follows: In C language, the char type is regarded as a signed type by default. When the char type is compared with the unsigned char type, the unsigned char is converted to char by default, so the value of b in the if-statement should be -1, but when it is defined with const, b is not staged under the optimization level of O2, but is compared with c as an integer of size 255, and an incorrect output is obtained.
+Our **manual analysis** of this example is as follows: In C language, the char type is regarded as a signed type by default. When the char type is compared with the unsigned char type, the unsigned char is converted to char by default, so the value of b in the if-statement should be -1, but when it is defined with const, b is not staged under the optimization level of O2, but is compared with c as an integer of value 255, and an incorrect output is obtained.
 
 On the heatmap of **attention** changes, we can clearly find that the model pays more and more attention to the definitions of c and b, and in the if statement, the model pays more and more attention to the two variables c and b before and after, indicating that the model also believes that there is Type conversion operations can prove that the model captures failure-relevant semantics.
 
