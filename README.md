@@ -17,3 +17,7 @@ We have re-implement the other four techniques based on our four datasets. If yo
 Run prioritization.py to get the final result.
 
 The figures will be saved and you can check it.
+
+# Measure effectiveness in capturing causal relationships.
+It's hard to directly measure the accuracy of captured causal relationships, since the root causes of bugs are described in natural languages within bug reports while the failure-relevant features extracted from test programs are represented as semantic vectors (typical outputs of code representation models). There is no automatic methods measuring their matching degrees. 
+But we manually analyzed some cases to demonstrate the accuracy.
