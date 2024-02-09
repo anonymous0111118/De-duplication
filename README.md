@@ -56,18 +56,18 @@ This example encountered the same bug as case 1, and after conducting a thorough
 Furthermore, by examining the heatmap of **attention**, it becomes evident that the model assigns a similar level of attention to this example as it did to case 1. This suggests that the model recognizes the shared patterns and relevance between the two cases, reinforcing the consistency of its attention mechanism.
 
 * Case No.3
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
+First of all, for ease to understand, there is a prerequisite knowledge：In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*.
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
-
-Based on our **manual analysis** of this example, we have observed the following:
-
-In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*. Therefore, in the *if-statement*, the value of *b* should be *-1*. However, when *b* is defined as *const*, under the optimization level of -O2, it is compared with *c* as an integer with a wrong value of 255. This inconsistency leads to an incorrect output.
+Based on our **manual analysis** of this example, we have observed about the failure-relvant semantics the following:  
+1. 
+Therefore, in the *if-statement*, the value of *b* should be *-1*. However, when *b* is defined as *const*, under the optimization level of -O2, it is compared with *c* as an integer with a wrong value of 255. This inconsistency leads to an incorrect output.
 
 Regarding the heatmap changes in **attention**, it is evident that the model increasingly focuses on the definitions of *c* and *b*. In the *if-statement*, the model pays growing attention to the variables *c* and *b*. There, the model's comprehension of the distinct types involved suggests its recognition of the existence of type conversion operations, thereby capturing failure-relevant semantics.
 
 
 * Case No.4
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
 
 After conducting a thorough **manual analysis**, it was determined that this example encountered the same bug as case 3, with the root cause being identical.
 
