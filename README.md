@@ -33,9 +33,9 @@ But we manually analyzed some cases to demonstrate the accuracy.
 After our **manual analysis**, this example revealed a compiler bug caused by 
 1. the structure's definition (two integer member variables),
 2. the distinct initial values of global variables *a* and *b*
-3. and the statement of cross-copying on lines 05 and 06.
+3. and the statement of cross-assignment on lines 05 and 06.
 
-During -O2 level optimization, the compiler selectively executes line 06 while disregarding line 05. Consequently, the wrong value of *b.d* is ultimately displayed through the print function, showcasing the influence of the compiler's optimization on -O2 level.
+The root cause of this bug is that under the -O2 optimization level, after cross-assignment of structure type objects *a* and *b* with two member variables, line 5 was incorrectly optimized out.
 
 The heatmap diagram of **attention** illustrates the definition of the structure and highlights the differing initial values of the second member variable, *d*, within the global variables *a* and *b*. Since *a* does not provide an initial value, the model can only enhance attention when defining *a*. The cross assignment statement on lines 05 and 06, along with the final output statement for *b.d*, collectively contribute to triggering the semantics of this bug and attract the attention of the model. Surprisingly, in this example, the attention mechanism precisely recognizes the second value as the point of differentiation between variables *a* and *b* (indicated by the red 1 on line 02). This demonstrates the model's ability to accurately identify the crucial aspects of the code and highlight the relevant information for analysis.
 
