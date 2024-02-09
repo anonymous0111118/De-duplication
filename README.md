@@ -30,19 +30,19 @@ But we manually analyzed some cases to demonstrate the accuracy.
   
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/a8edf745-f992-4197-9843-5e8756e3745a" alt="Case 1" width="300" height="300">
 
-After our **manual analysis**, this example revealed a compiler bug caused by 
+The **root cause** of the bug triggered by this program is
 1. the structure's definition (two integer member variables),
 2. the distinct initial values of global variables *a* and *b*
 3. and the statement of cross-assignment on lines 05 and 06.
 
-The root cause of this bug is that under the -O2 optimization level, after cross-assignment of structure type objects *a* and *b* with two member variables, line 5 was incorrectly optimized out.
+Under the -O2 optimization level, after cross-assignment of structure type objects *a* and *b* with two member variables, line 5 was incorrectly optimized out.
 
 The heatmap diagram of **attention** illustrates:
 1. The model notices that a certain structure type had two member variables when it was defined. (line 01)
 2. Immediately afterwards, the model finds that when *a* and *b* are initialized, the values of the second member variables were not equal. ( the *0* is black but *1* is red in *{0,1}* in line 02). 
 3. The model pays close attention to the cross assignment operation between *a* and *b*. (line 05 & line 06)
 
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are the cross assignment of variables *a* *b* of two structural types with different values of the second member variable, which demonstrates the alignment between attention and the results of manual analysis, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are the cross assignment of variables *a* *b* of two structural types with different values of the second member variable, which demonstrates the alignment between attention and the root cause, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
 
 
 
@@ -51,7 +51,7 @@ In summary, through the analysis of attention, the failure-relevant semantics un
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 3" width="300" height="300">
 
-This example encountered the same bug as case 1, and after conducting a thorough **manual analysis**, it was discovered that the root cause of the bug was identical in both cases.
+This example encountered the same bug as case 1, and the **root cause** of the bug was identical in both cases.
 
 Furthermore, by examining the heatmap of **attention**, it becomes evident that the model assigns a similar level of attention to this example as it did to case 1. This suggests that the model recognizes the shared patterns and relevance between the two cases, reinforcing the consistency of its attention mechanism.
 
@@ -60,7 +60,7 @@ Furthermore, by examining the heatmap of **attention**, it becomes evident that 
 
 First of all, for ease to understand, there is a prerequisite knowledge：In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*.
 
-Based on our **manual analysis** of this example, we have observed about the failure-relvant semantics the following:  
+The **root cause** of the bug triggered by this program is:
 1. There's a global variable *a*.
 2. An unsigned char type variable *b* is declared and given a value *254* (which is greater than *127* and when it is compared to a char variable it should be converted to *254 - 266 = -2*).
 3. A char type variable *c*.
@@ -77,13 +77,13 @@ Regarding the heatmap changes in **attention**, it is evident that:
 6. Through the red *= e*, model knows the comparision result of *b* and *c* is assigned to the gloval variable *a* in function *d*. (line 04)
 
 
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are when comparing an unsigned char type variable exceeding 127 with another char type variable, adding at least one of them as const, results differently in different optimization levels, which shows the alignment between attention and the results of manual analysis, thereby demonstrating the effectiveness of the failure-relevant semantics extracted by BLADE.
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are when comparing an unsigned char type variable exceeding 127 with another char type variable, adding at least one of them as const, results differently in different optimization levels, which shows the alignment between attention and the root cause, thereby demonstrating the effectiveness of the failure-relevant semantics extracted by BLADE.
 
 
 * Case No.4
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
 
-After conducting a thorough **manual analysis**, it was determined that this example encountered the same bug as case 3, with the root cause being identical.
+It was determined that this example encountered the same bug as case 3, with the **root cause** being identical.
 
 Despite the *if-statements* in this program, its logical structure aligns with that of case 3. The model doesn't pay much attention to the *if-statement*. It primarily focuses on the definitions and comparisons involving *char* and *const unsigned char* and the value of *unsigned char*. This demonstrates the model's accurate identification of the genuine failure-relevant semantics within this set of examples.
 
@@ -93,7 +93,7 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
-Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have find the failure-relevant semantics are :
+Let's analyze a more complex example. The **root cause** of the bug triggered by this program is:
 1. There're *char* type pointer *c* and *e*, and a pinter *d*.
 2. In the first code block, the value in the address *d* points changes to *1*.
 3. *Char* type variable *g* is declared without a value.
@@ -105,7 +105,7 @@ We can read the heat map of *attention* changed and find:
 3. The model pays great attentions to the whole declation statement of *char g*. (all red in line 10. This may illustrate the model finds there the value of *g* given differently in different optimization levels. And it is *g*'s value which finally influences the output.)
 4. The model finds some other assignment statements which are one part of reasons to trigger the optimization (like *g*'s address will be used in line 13, and global char pointer *e*'s value can be possibly changed.) or directly influence the final output (line 14).
 
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are one *char* type variable without a initial value occupies the global pointer's address which points another modified value. These are highly coincident with our manual analysis, proving that the model's ability to explain failure-relevant is excellent.
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are one *char* type variable without a initial value occupies the global pointer's address which points another modified value. These are highly coincident with the root cause, proving that the model's ability to explain failure-relevant is excellent.
 
 
 
