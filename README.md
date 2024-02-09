@@ -42,7 +42,7 @@ The heatmap diagram of **attention** illustrates:
 2. Immediately afterwards, the model finds that when *a* and *b* are initialized, the values of the second member variables were not equal. ( the *0* is black but *1* is red in *{0,1}* in line 02). 
 3. The model pays close attention to the cross assignment operation between *a* and *b*. (line 05 & line 06)
 
-This example demonstrates the alignment between attention and the results of manual analysis, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
+In summary, through the analysis of attention, the failure-relevant semantics understood by the model are the cross assignment of variables *a* *b* of two structural types with different values of the second member variable, which demonstrates the alignment between attention and the results of manual analysis, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
 
 
 
