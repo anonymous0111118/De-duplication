@@ -30,7 +30,12 @@ But we manually analyzed some cases to demonstrate the accuracy.
   
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/a8edf745-f992-4197-9843-5e8756e3745a" alt="Case 1" width="300" height="300">
 
-After our **manual analysis**, this example revealed a compiler bug caused by the structure's definition (two integer member variables), the distinct initial values of global variables *a* and *b* and the statement of cross-copying on lines 05 and 06. During -O2 level optimization, the compiler selectively executes line 06 while disregarding line 05. Consequently, the wrong value of *b.d* is ultimately displayed through the print function, showcasing the influence of the compiler's optimization on -O2 level.
+After our **manual analysis**, this example revealed a compiler bug caused by 
+1. the structure's definition (two integer member variables),
+2. the distinct initial values of global variables *a* and *b*
+3. and the statement of cross-copying on lines 05 and 06.
+
+During -O2 level optimization, the compiler selectively executes line 06 while disregarding line 05. Consequently, the wrong value of *b.d* is ultimately displayed through the print function, showcasing the influence of the compiler's optimization on -O2 level.
 
 The heatmap diagram of **attention** illustrates the definition of the structure and highlights the differing initial values of the second member variable, *d*, within the global variables *a* and *b*. Since *a* does not provide an initial value, the model can only enhance attention when defining *a*. The cross assignment statement on lines 05 and 06, along with the final output statement for *b.d*, collectively contribute to triggering the semantics of this bug and attract the attention of the model. Surprisingly, in this example, the attention mechanism precisely recognizes the second value as the point of differentiation between variables *a* and *b* (indicated by the red 1 on line 02). This demonstrates the model's ability to accurately identify the crucial aspects of the code and highlight the relevant information for analysis.
 
