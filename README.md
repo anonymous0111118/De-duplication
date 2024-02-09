@@ -35,4 +35,4 @@ In this example, attention is consistent with the results of manual analysis, pr
 
 * Case No.2
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/40e34efd-77bb-4031-9e55-a77a57b626ff" alt="Case 1" width="300" height="400">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/40e34efd-77bb-4031-9e55-a77a57b626ff" alt="Case 1" width="400" height="500">
