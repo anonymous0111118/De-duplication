@@ -31,7 +31,7 @@ But we manually analyzed some cases to demonstrate the accuracy.
 
 After our **manual analysis**, this example revealed a compiler bug caused by the structure's definition (two integer member variables), the distinct initial values of global variables *a* and *b* and the statement of cross-copying on lines 05 and 06. During -O2 level optimization, the compiler selectively executes line 06 while disregarding line 05. Consequently, the wrong value of *b.d* is ultimately displayed through the print function, showcasing the influence of the compiler's optimization on -O2 level.
 
-The heatmap diagram of **attention** illustrates the definition of the structure and highlights the differing initial values of the second member variable, d, within the global variables **a* and *b*. Since *a* does not provide an initial value, the model can only enhance attention when defining *a*. The cross assignment statement on lines 05 and 06, along with the final output statement for *b.d*, collectively contribute to triggering the semantics of this bug and attract the attention of the model. Surprisingly, in this example, the attention mechanism precisely recognizes the second value as the point of differentiation between variables *a* and *b* (indicated by the red 1 on line 02). This demonstrates the model's ability to accurately identify the crucial aspects of the code and highlight the relevant information for analysis.
+The heatmap diagram of **attention** illustrates the definition of the structure and highlights the differing initial values of the second member variable, d, within the global variables *a* and *b*. Since *a* does not provide an initial value, the model can only enhance attention when defining *a*. The cross assignment statement on lines 05 and 06, along with the final output statement for *b.d*, collectively contribute to triggering the semantics of this bug and attract the attention of the model. Surprisingly, in this example, the attention mechanism precisely recognizes the second value as the point of differentiation between variables *a* and *b* (indicated by the red 1 on line 02). This demonstrates the model's ability to accurately identify the crucial aspects of the code and highlight the relevant information for analysis.
 
 This example demonstrates the alignment between attention and the results of manual analysis, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
 
@@ -42,28 +42,27 @@ This example demonstrates the alignment between attention and the results of man
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 3" width="300" height="300">
 
-This example triggered the same bug as case 1. After **manual analysis**, they found that the root cause of the bug was also the same.
+This example encountered the same bug as case 1, and after conducting a thorough **manual analysis**, it was discovered that the root cause of the bug was identical in both cases.
 
-In addition, we can see from the heatmap of **attention** that the model pays the same attention to it as it does to case 1.
+Furthermore, by examining the heatmap of **attention**, it becomes evident that the model assigns a similar level of attention to this example as it did to case 1. This suggests that the model recognizes the shared patterns and relevance between the two cases, reinforcing the consistency of its attention mechanism.
 
 * Case No.3
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
 
+Based on our **manual analysis** of this example, we have observed the following:
 
+In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*. Therefore, in the *if-statement*, the value of *b* should be *-1*. However, when *b* is defined as *const*, under the optimization level of -O2, it is compared with *c* as an integer with a wrong value of 255. This inconsistency leads to an incorrect output.
 
-
-Our **manual analysis** of this example is as follows: In C language, the char type is regarded as a signed type by default. When the char type is compared with the unsigned char type, the unsigned char is converted to char by default, so the value of b in the if-statement should be -1, but when it is defined with const, b is not staged under the optimization level of O2, but is compared with c as an integer of value 255, and an incorrect output is obtained.
-
-On the heatmap of **attention** changes, we can clearly find that the model pays more and more attention to the definitions of c and b, and in the if statement, the model pays more and more attention to the two variables c and b before and after, indicating that the model also believes that there is Type conversion operations can prove that the model captures failure-relevant semantics.
+Regarding the heatmap changes in **attention**, it is evident that the model increasingly focuses on the definitions of *c* and *b*. In the *if-statement*, the model pays growing attention to the variables *c* and *b*. There, the model's comprehension of the distinct types involved suggests its recognition of the existence of type conversion operations, thereby capturing failure-relevant semantics.
 
 
 * Case No.4
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
 
-This example triggered the same bug as case 3. After **manual analysis**, they found that the root cause of the bug was also the same.
+After conducting a thorough **manual analysis**, it was determined that this example encountered the same bug as case 3, with the root cause being identical.
 
-Although this program lacks the expression of conditional statements, it is logically the same as case 3. The model's **attention** change for this example is very similar to the case 3, and in this process, it only pays attention to char and const char definitions and also comparisons between them, but does not pay special attention to the expression of if-expressions in case4, which shows that the model accurately discovered the true failure-relevant semantics of this set of examples.
+Despite the absence of *if-statements* in this program, its logical structure aligns with that of case 3. Remarkably, the **attention** pattern exhibited by the model for this example closely resembles that of case 3. The model primarily focuses on the definitions and comparisons involving *char* and *const char*, without placing significant emphasis on the *if-expression* present in case 3. This demonstrates the model's accurate identification of the genuine failure-relevant semantics within this set of examples.
 
 
 * Case No.5
@@ -71,20 +70,28 @@ Although this program lacks the expression of conditional statements, it is logi
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
-Now let's analyze one example which is more complex. In this example, after our **manual analysis**, due to the assignment of the global pointer d in lines 05-08, the integer value at the address pointed to by d is 1. When g is declared in the 10th line, the address is given to g, so that the initial integer value of g is 1, which influences the output at last.
+Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have determined that the integer value at the address pointed to by the global pointer *d* (lines 05-08) is assigned as *1*. After that, when *g* is declared in the 10th line, on -O2 optimization level, the address is wrongly assigned to *g*, resulting in the initial integer value of *g* being *1*. This initialization has a subsequent impact on the final output.
 
-The heatmap of **attention** change is a bit hard to understand. Based on my experience, I will give you some tips.
-  1. Analyze which variable types the model pays attention to.
-  2. Analyze which constant values on the right side of the assignment statement the model pays attention to.
-  3. Analyze which entire statement model pays special attention.
+Based on my experience, I will provide you with some tips to better comprehend the heatmap of **attention** change:
 
-The answer is below:
-  1. In this case, the variable types that the model pays attention to are necessary to trigger bugs, and the variable types that the model does not pay attention to can still trigger bugs after modification.
-  2. The constants that the model pays attention to will not show bugs after modification, while the constants that the model does not pay attention to are unnecessary for the performance of bugs.
-  3. The model pays special attention to the declaration of g, which is the top priority triggered by this bug. Because the triggering of this bug does not require an assignment statement, but the assignment through the address occurs quietly when it is declared.
+1. Analyze the variable types that attract the model's attention. This examination will shed light on the specific data types the model focuses on.
+2. Investigate the constant values on the right side of assignment statements that capture the model's attention. This exploration will help unveil the particular values that the model deems significant in relation to the code's execution.
+3. Explore the complete statements to which the model assigns special attention. This analysis will offer valuable insights into the code sections that are crucial for the model's understanding and capturing of failure-relevant semantics.
+
+
+We can find:
+1. The model's attention is primarily directed towards specific variable types that are essential for triggering bugs. Surprisingly, modifying variable types that the model does not pay attention to can still trigger bugs. This suggests that the model's focus on certain variable types is crucial, while others may have indirect effects on bug performance.
+
+2. The constants that capture the model's attention tend to exhibit bug-free behavior after modifications. Conversely, the constants that the model does not pay attention to are typically unnecessary for bug performance.
+
+3. The model assigns significant attention to the declaration of variable *g*, as it serves as the **key trigger** for this bug. Interestingly, this bug does not require an explicit assignment statement but rather quietly occurs through the address assignment of *g* during declaration.
      
-In the heatmap changed by **attention**, we can see that in the main function, the model pays great attention to assignment statements. For integer assignments that have an impact on the output results, such as lines 6 and 14, the model pays special attention to the specific values on the right side. The specific assignment model of line 12 that has no impact on the results is not paid attention to. At the same time, we found that the main reason why this bug was triggered was the difference in the initial value of char g at different optimization levels in line 10. This feature was accurately captured by the model. Therefore, in this example, the model The explanation of failure-relevant semantics is quite correct.
+In the heatmap of **attention** changes, it is evident that the model allocates significant attention to assignment statements within the main function. Specifically, for integer assignments that impact the output results, such as in lines 6 and 14, the model shows distinct attention to the specific values on the right side of the assignments. Conversely, the assignment statement in line 12, which has no impact on the results, receives less attention from the model.
+
+Moreover, the analysis reveals that the discrepancy in the initial value of *char g;* at different optimization levels in line 10 is the main reason for triggering this bug. Remarkably, the model accurately captures this distinctive characteristic. As a result, the model's explanation of failure-relevant semantics in this example is highly accurate.
 
 **discussion**
 
-BLADE's explanation method is very accurate, because we are explaining the last layer of the neural network, and attention is the parameter of the upstream transformer, which is mapped to the input. Not only is the accuracy loss of the downstream classification parameters , but also severe second part loss because it's mapped to the input, so it is very rough and therefore certainly not intuitive enough.
+The explanation method employed by BLADE is known for its high accuracy, primarily attributed to its emphasis on elucidating the last layer of the neural network. Attention, serving as a parameter of the upstream transformer, undergoes mapping to the input. This mapping process facilitates the capturing of not only the accuracy loss associated with downstream classification parameters but also the pronounced second part loss stemming from the parameters mapped onto the input. Consequently, the resulting explanation may not possess the desired level of intuitiveness. 
+
+**Therefore, even though BLADE's AI explanation method differs from the human-understandable attention heatmap, it is more precise.**
