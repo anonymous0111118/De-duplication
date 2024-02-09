@@ -69,7 +69,7 @@ Based on our **manual analysis** of this example, we have observed about the fai
 
 Regarding the heatmap changes in **attention**, it is evident that:
 1. The model discovered the declaration of *a*, but did not pay attention to its type.( *int* is black but *a* is red in line 01)
-2. The model focuses on the whole declaration statement of *b*, including its type and the initial value assigned to it *254*, which is likely to indicate that the model has noticed the semantics that b is greater than 127. (line 02)
+2. The model focuses on the whole declaration statement of *b*, including its type and the initial value assigned to it *254*, which is likely to indicate that the model has noticed the semantics that b is greater than *127*. (line 02)
 3. The model finds the declaration of *c* but ignores its initial value. Combining the previous line, it can be seen that the model knows this semantics, that is, it only needs to consider whether the assignment of the unsigned char type is greater than *127*. (black *0* in line 03) (red *254* in line 02)
 4. The model focuses on *const*. (line 03)
 5. The model pays more attention to the execution of the *d* function with a comparison between *b* and *c*. (line 07)
