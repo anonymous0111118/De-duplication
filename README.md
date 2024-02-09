@@ -94,7 +94,14 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
 Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have find the failure-relevant semantics are :
-1. the integer value at the address pointed to by the global pointer *d* (lines 05-08) is assigned as *1*. After that, when *g* is declared in the 10th line, on -O2 optimization level, the address is wrongly assigned to *g*, resulting in the initial integer value of *g* being *1*. This initialization has a subsequent impact on the final output.
+1. There're *char* type pointer *c* and *e*, and a pinter *d*.
+2. In the first code block, the value in the address *d* points changes to *1*.
+3. *Char* type variable *g* is declared without a value.
+4. There're some other complex elements trigger the optimization such as *e*'s possibly assignment or *g*'s address will be used. Finally in the -O2 optimization level, *g*'s address is assigned wrongly by *d* and *g*'s value is naturally *1*.
+
+We can read the heat map of *attention* changed and find:
+1. The model discovers the declaration of *a*, *b*, pointer *d*, and the point *c*'s type *char*. (line 01 ~ 03)
+2. In the first block, the model pays only attention to the value changed in the address d points but ignores other things. (black *f* in line 06 & 07) 
 
 
 **tips**
