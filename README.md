@@ -96,6 +96,8 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have find the failure-relevant semantics are :
 1. the integer value at the address pointed to by the global pointer *d* (lines 05-08) is assigned as *1*. After that, when *g* is declared in the 10th line, on -O2 optimization level, the address is wrongly assigned to *g*, resulting in the initial integer value of *g* being *1*. This initialization has a subsequent impact on the final output.
 
+
+**tips**
 Based on my experience, I will provide you with some tips to better comprehend the heatmap of **attention** change:
 
 1. Analyze the variable types that attract the model's attention. This examination will shed light on the specific data types the model focuses on.
