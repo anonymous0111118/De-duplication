@@ -52,3 +52,5 @@ This example triggered the same bug as case 1. After **manual analysis**, they f
 In addition, we can see from the heatmap of **attention** that the model pays the same attention to it as it does to case 1.
 
 * Case No.4
+
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
