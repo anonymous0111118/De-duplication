@@ -93,7 +93,8 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
-Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have determined that the integer value at the address pointed to by the global pointer *d* (lines 05-08) is assigned as *1*. After that, when *g* is declared in the 10th line, on -O2 optimization level, the address is wrongly assigned to *g*, resulting in the initial integer value of *g* being *1*. This initialization has a subsequent impact on the final output.
+Let's analyze a more complex example. After conducting a thorough **manual analysis**, we have find the failure-relevant semantics are :
+1. the integer value at the address pointed to by the global pointer *d* (lines 05-08) is assigned as *1*. After that, when *g* is declared in the 10th line, on -O2 optimization level, the address is wrongly assigned to *g*, resulting in the initial integer value of *g* being *1*. This initialization has a subsequent impact on the final output.
 
 Based on my experience, I will provide you with some tips to better comprehend the heatmap of **attention** change:
 
