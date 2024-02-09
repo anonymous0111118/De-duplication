@@ -24,5 +24,4 @@ But we manually analyzed some cases to demonstrate the accuracy.
 
 **We have tracked the changes in attention for each token in the fitting process. Tokens displayed in red indicate an increase in attention during fitting, while tokens displayed in black indicate a decrease in attention during fitting.**
 * Case No.1
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/b5c569e0-a0a6-41ba-99f1-5f69999b819a
-" alt="Case 1" width="300" height="300">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/b5c569e0-a0a6-41ba-99f1-5f69999b819a" alt="Case 1" width="300" height="300">
