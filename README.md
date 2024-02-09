@@ -108,7 +108,11 @@ We can read the heat map of *attention* changed and find:
 In summary, through the analysis of attention, the failure-relevant semantics understood by the model are one *char* type variable without a initial value occupies the global pointer's address which points another modified value. These are highly coincident with our manual analysis, proving that the model's ability to explain failure-relevant is excellent.
 
 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
 **tips**
+
 Based on my experience, I will provide you with some tips to better comprehend the heatmap of **attention** change:
 
 1. Analyze the variable types that attract the model's attention. This examination will shed light on the specific data types the model focuses on.
