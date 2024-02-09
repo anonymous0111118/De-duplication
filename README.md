@@ -71,6 +71,16 @@ Although this program lacks the expression of conditional statements, it is logi
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
-In this example, after our **manual analysis**, due to the assignment of the global pointer d in lines 05-08, the integer value at the address pointed to by d is 1. When g is declared in the tenth line, the address is given to g, so that the initial integer value of g is 1, which is manifested through subsequent assignment errors.
+Now let's analyze one example which is more complex. In this example, after our **manual analysis**, due to the assignment of the global pointer d in lines 05-08, the integer value at the address pointed to by d is 1. When g is declared in the 10th line, the address is given to g, so that the initial integer value of g is 1, which influences the output at last.
 
+The heatmap of **attention** change is a bit hard to understand. Based on my experience, I will give you some tips.
+  1. Analyze which variable types the model pays attention to.
+  2. Analyze which constant values on the right side of the assignment statement the model pays attention to.
+  3. Analyze which entire statement model pays special attention.
+
+The answer is below:
+  1. In this case, the variable types that the model pays attention to are necessary to trigger bugs, and the variable types that the model does not pay attention to can still trigger bugs after modification.
+  2. The constants that the model pays attention to will not show bugs after modification, while the constants that the model does not pay attention to are unnecessary for the performance of bugs.
+  3. The model pays special attention to the declaration of g, which is the top priority triggered by this bug. Because the triggering of this bug does not require an assignment statement, but the assignment through the address occurs quietly when it is declared.
+     
 In the heatmap changed by **attention**, we can see that in the main function, the model pays great attention to assignment statements. For integer assignments that have an impact on the output results, such as lines 6 and 14, the model pays special attention to the specific values on the right side. The specific assignment model of line 12 that has no impact on the results is not paid attention to. At the same time, we found that the main reason why this bug was triggered was the difference in the initial value of char g at different optimization levels in line 10. This feature was accurately captured by the model. Therefore, in this example, the model The explanation of failure-relevant semantics is quite correct.
