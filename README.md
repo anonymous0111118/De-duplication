@@ -44,3 +44,5 @@ In the heatmap changed by attention, we can see that in the main function, the m
 
 
 * Case No.3
+
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 1" width="300" height="300">
