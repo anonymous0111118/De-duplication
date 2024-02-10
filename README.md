@@ -60,15 +60,16 @@ Furthermore, by examining the heatmap of **attention**, it becomes evident that 
 * Case No.3
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
 
-First of all, for ease to understand, there is a prerequisite knowledge：In the C language, the *char* type is considered *signed* by default. When comparing a *char* type with an *unsigned* char type, the *unsigned char* should be implicitly converted to *char*.
+First and foremost, to ensure clarity of understanding, it is imperative to acknowledge a prerequisite knowledge in the realm of the C language. By default, the *char* type is considered *signed* within this language. Consequently, when comparing a *char* type with an *unsigned char* type, implicit conversion takes place, wherein the *unsigned char* is converted to a *char*.
 
-The **root cause** of the bug triggered by this program is:
-1. There's a global variable *a*.
-2. An unsigned char type variable *b* is declared and given a value *254* (which is greater than *127* and when it is compared to a char variable it should be converted to *254 - 266 = -2*).
-3. A char type variable *c*.
-4. At least one of *b* and *c* is *const*.
-5. *b* is compared to *c* and in -O2 optimization level, the value of *b* isn't correctly coverted to *-2* but still *254*.
-6. The camparasion result is assigned to *a*.
+The **root cause** of the bug, which was triggered by the execution of this program, can be attributed to the following factors:
+
+1. The presence of a global variable, denoted as *a*.
+2. Declaration of an *unsigned char* type variable, *b*, assigned a value of *254*. It is important to note that this value exceeds *127*, and when compared to a *char* variable, it should be converted to *-2* using the formula *254 - 266 = -2*.
+3. A *char* type variable, denoted as *c*.
+4. At least one of the variables *b* and *c* is declared as *const*.
+5. The comparison between *b* and *c* takes place, and under the -O2 optimization level, the value of b fails to be correctly converted to *-2* but instead retains the value *254*.
+6l Finally, the result of the comparison is assigned to the variable *a*.
 
 Regarding the heatmap changes in **attention**, it is evident that:
 1. The model discovers the declaration of *a*, but does not pay attention to its type.( *int* is black but *a* is red in line 01)
@@ -78,9 +79,7 @@ Regarding the heatmap changes in **attention**, it is evident that:
 5. The model pays more attention to the execution of the *d* function with a comparison between *b* and *c*. (line 07)
 6. Through the red *= e*, model knows the comparision result of *b* and *c* is assigned to the gloval variable *a* in function *d*. (line 04)
 
-
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are when comparing an unsigned char type variable exceeding 127 with another char type variable, adding at least one of them as const, results differently in different optimization levels, which shows the alignment between attention and the root cause, thereby demonstrating the effectiveness of the failure-relevant semantics extracted by BLADE.
-
+To summarize, a comprehensive analysis of attention reveals the failure-relevant semantics discerned by the model. Specifically, it identifies the disparity that arises when comparing an unsigned char type variable, surpassing the value of 127, with a char type variable, while incorporating the presence of at least one of them as const. Notably, this discrepancy manifests differently across various optimization levels. This alignment between attention patterns and the underlying root cause substantiates the efficacy of the failure-relevant semantics extracted by BLADE, thus providing compelling evidence in support of its effectiveness.
 
 * Case No.4
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
