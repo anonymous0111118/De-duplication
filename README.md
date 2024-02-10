@@ -22,9 +22,7 @@ The figures will be saved and you can check it.
 It's hard to directly measure the accuracy of captured causal relationships, since the root causes of bugs are described in natural languages within bug reports while the failure-relevant features extracted from test programs are represented as semantic vectors (typical outputs of code representation models). There is no automatic methods measuring their matching degrees. 
 But we manually analyzed some cases to demonstrate the accuracy.
 
-**We have tracked the changes in attention for each token during the fitting process. Tokens highlighted in
-<font color="red">red indicate an increase in attention during fitting</font> 
-, while tokens displayed in black indicate a decrease in attention during fitting.**
+**During the fitting process, we meticulously monitored the dynamics of attention for each token. Tokens that exhibited heightened attention were visually marked in a vibrant shade of red, signifying an increase in attention. Conversely, tokens that experienced diminished attention were visually represented in a stark black hue, indicating a decrease in attention.**
 
 * Case No.1
   
