@@ -39,12 +39,12 @@ The fundamental **root cause** of the bug, which was triggered by the execution 
 
 When the -O2 optimization level was applied, an erroneous optimization occurred leading to the incorrect elimination of line 5. This optimization was triggered after the cross-assignment of structure type objects a and b, both containing two member variables.
 
-The heatmap diagram of **attention** illustrates:
-1. The model notices that a certain structure type had two member variables when it was defined. (line 01)
-2. Immediately afterwards, the model finds that when *a* and *b* are initialized, the values of the second member variables were not equal. ( the *0* is black but *1* is red in *{0,1}* in line 02). 
-3. The model pays close attention to the cross assignment operation between *a* and *b*. (line 05 & line 06)
-
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are the cross assignment of variables *a* *b* of two structural types with different values of the second member variable, which demonstrates the alignment between attention and the root cause, thereby verifying the effectiveness of the failure-relevant semantics extracted by BLADE.
+The heatmap representation of the **attention** diagram elucidates that:
+1. The model accurately detects the presence of a particular structure type defined with two member variables at line 01.
+2. Subsequently, the model identifies a discrepancy in the initialization of *a* and *b*, specifically observing that the values of the second member variables differ. This distinction is visually depicted as *0* appearing in black while *1* is highlighted in red within *{0,1}* at line 02.
+3. The model exhibits heightened focus on the cross-assignment operation between *a* and *b* as indicated by line 05 and line 06.
+   
+In essence, through the meticulous analysis of attention patterns, the model comprehends the failure-relevant semantics associated with the cross-assignment of variables a and b within two distinct structure types, featuring divergent values for the second member variable. This alignment between attention and the root cause effectively validates the efficacy of the failure-relevant semantics extracted by BLADE.
 
 
 
