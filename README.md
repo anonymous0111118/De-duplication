@@ -99,7 +99,7 @@ Let's analyze a more complex example. The **root cause** of the bug triggered by
 3. *Char* type variable *g* is declared without a value.
 4. There're some other complex elements trigger the optimization such as *e*'s possibly assignment or *g*'s address will be used. Finally in the -O2 optimization level, *g*'s address is assigned wrongly by *d* and *g*'s value is naturally *1*.
 
-We can read the heat map of *attention* changed and find:
+We can read the heat map of **attention** changed and find:
 1. The model discovers the declaration of *a*, *b*, pointer *d*, and the point *c*'s type *char*. (line 01 ~ 03)
 2. In the first block, the model pays only attention to the value changed in the address d points but ignores other things. (black *f* in line 06 & 07)
 3. The model pays great attentions to the whole declation statement of *char g*. (all red in line 10. This may illustrate the model finds there the value of *g* given differently in different optimization levels. And it is *g*'s value which finally influences the output.)
