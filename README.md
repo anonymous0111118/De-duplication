@@ -27,13 +27,16 @@ But we manually analyzed some cases to demonstrate the accuracy.
 * Case No.1
   
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/a8edf745-f992-4197-9843-5e8756e3745a" alt="Case 1" width="300" height="300">
-
-The **root cause** of the bug triggered by this program is
+The fundamental **root cause** of the bug, which was triggered by the execution of this program, stems from three key factors:
+1. Firstly, the definition of the structure itself, characterized by the presence of two integer member variables. 
+2. Secondly, the distinct initial values assigned to the global variables *a* and *b*. 
+3. And finally, the occurrence of a cross-assignment statement located on lines 05 and 06, contributing to the manifestation of the bug.
+<!-- The **root cause** of the bug triggered by this program is
 1. the structure's definition (two integer member variables),
 2. the distinct initial values of global variables *a* and *b*
-3. and the statement of cross-assignment on lines 05 and 06.
+3. and the statement of cross-assignment on lines 05 and 06. -->
 
-Under the -O2 optimization level, after cross-assignment of structure type objects *a* and *b* with two member variables, line 5 was incorrectly optimized out.
+When the -O2 optimization level was applied, an erroneous optimization occurred leading to the incorrect elimination of line 5. This optimization was triggered after the cross-assignment of structure type objects a and b, both containing two member variables.
 
 The heatmap diagram of **attention** illustrates:
 1. The model notices that a certain structure type had two member variables when it was defined. (line 01)
