@@ -53,7 +53,7 @@ In essence, through the meticulous analysis of attention patterns, the model com
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/e0e7d37e-3655-4da5-8162-01ca5277a5a0" alt="Case 3" width="300" height="300">
 
-This example encountered the same bug as case 1, and the **root cause** of the bug was identical in both cases.
+This example triggers the same bug as case 1, and the **root cause** of the bug was identical in both cases.
 
 Furthermore, by examining the heatmap of **attention**, it becomes evident that the model assigns a similar level of attention to this example as it did to case 1. This suggests that the model recognizes the shared patterns and relevance between the two cases, reinforcing the consistency of its attention mechanism.
 
