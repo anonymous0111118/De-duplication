@@ -94,20 +94,20 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
 
-Let's analyze a more complex example. The **root cause** of the bug triggered by this program is:
-1. There're *char* type pointer *c* and *e*, and a pinter *d*.
-2. In the first code block, the value in the address *d* points changes to *1*.
-3. *Char* type variable *g* is declared without a value.
-4. There're some other complex elements trigger the optimization such as *e*'s possibly assignment or *g*'s address will be used. Finally in the -O2 optimization level, *g*'s address is assigned wrongly by *d* and *g*'s value is naturally *1*.
+Let us embark on the analysis of a more intricate example. The bug triggered by this program can be traced back to its **root cause**, which consists of the following elements:
+1. The presence of two char type pointers, *c* and *e*, alongside a general pointer, *d*.
+2. Within the initial code block, the value pointed to by the address stored in *d* is altered to *1*.
+3. Declaration of a *char* type variable, *g*, without assigning it a specific value.
+4. Numerous complex factors contribute to the optimization process, such as the potential assignment of *e* or the utilization of the address of *g*. Ultimately, under the -O2 optimization level, *g*'s address is erroneously assigned by *d*, leading to *g* assuming a value of *1*.
 
-We can read the heat map of **attention** changed and find:
-1. The model discovers the declaration of *a*, *b*, pointer *d*, and the point *c*'s type *char*. (line 01 ~ 03)
-2. In the first block, the model pays only attention to the value changed in the address d points but ignores other things. (black *f* in line 06 & 07)
-3. The model pays great attentions to the whole declation statement of *char g*. (all red in line 10. This may illustrate the model finds there the value of *g* given differently in different optimization levels. And it is *g*'s value which finally influences the output.)
-4. The model finds some other assignment statements which are one part of reasons to trigger the optimization (like *g*'s address will be used in line 13, and global char pointer *e*'s value can be possibly changed.) or directly influence the final output (line 14).
+By scrutinizing the heatmap of **attention**, we can extract the following insights:
+1. The model identifies the declaration of *a*, *b*, the pointer *d*, and the *char* type of the variable *c*. This spans lines 01 to 03.
+2. In the initial code block, the model exhibits attention solely towards the value alteration within the address pointed to by *d*, inadvertently overlooking other relevant aspects. This is indicated by the black coloration of *f* in lines 06 and 07.
+3. The model places considerable emphasis on the entire declaration statement of the char variable *g*, as evidenced by the uniform red shading in line 10. This observation may signify the model's recognition of the varying values assigned to *g* across different optimization levels, with g's value ultimately influencing the program's output.
+4. The model identifies additional assignment statements that play a pivotal role in triggering the optimization process, such as the potential utilization of *g*'s address in line 13 and the possibility of altering the value of the global char pointer, *e*. Furthermore, line 14 directly influences the final output.
 
-In summary, through the analysis of attention, the failure-relevant semantics understood by the model are one *char* type variable without a initial value occupies the global pointer's address which points another modified value. These are highly coincident with the root cause, proving that the model's ability to explain failure-relevant semantics is excellent.
 
+In summary, through a meticulous examination of attention patterns, the model discerns the failure-relevant semantics, which revolve around an uninitialized *char* type variable occupying the address of a global pointer that points to another modified value. These findings align remarkably well with the root cause, thereby substantiating the model's exceptional capability to elucidate failure-relevant semantics.
 
 
 
