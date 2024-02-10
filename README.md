@@ -110,29 +110,4 @@ In summary, through the analysis of attention, the failure-relevant semantics un
 
 
 
--------------------------------------------------------------------------------------------------------------------------------------
-**tips**
 
-Based on my experience, I will provide you with some tips to better comprehend the heatmap of **attention** change:
-
-1. Analyze the variable types that attract the model's attention. This examination will shed light on the specific data types the model focuses on.
-2. Investigate the constant values on the right side of assignment statements that capture the model's attention. This exploration will help unveil the particular values that the model deems significant in relation to the code's execution.
-3. Explore the complete statements to which the model assigns special attention. This analysis will offer valuable insights into the code sections that are crucial for the model's understanding and capturing of failure-relevant semantics.
-
-
-We can find:
-1. The model's attention is primarily directed towards specific variable types that are essential for triggering bugs. Surprisingly, modifying variable types that the model does not pay attention to can still trigger bugs. This suggests that the model's focus on certain variable types is crucial, while others may have indirect effects on bug performance.
-
-2. The constants that capture the model's attention tend to exhibit bug-free behavior after modifications. Conversely, the constants that the model does not pay attention to are typically unnecessary for bug performance.
-
-3. The model assigns significant attention to the declaration of variable *g*, as it serves as the **key trigger** for this bug. Interestingly, this bug does not require an explicit assignment statement but rather quietly occurs through the address assignment of *g* during declaration.
-     
-In the heatmap of **attention** changes, it is evident that the model allocates significant attention to assignment statements within the main function. Specifically, for integer assignments that impact the output results, such as in lines 6 and 14, the model shows distinct attention to the specific values on the right side of the assignments. Conversely, the assignment statement in line 12, which has no impact on the results, receives less attention from the model.
-
-Moreover, the analysis reveals that the discrepancy in the initial value of *char g;* at different optimization levels in line 10 is the main reason for triggering this bug. Remarkably, the model accurately captures this distinctive characteristic. As a result, the model's explanation of failure-relevant semantics in this example is highly accurate.
-
-**discussion**
-
-The explanation method employed by BLADE is known for its high accuracy, primarily attributed to its emphasis on elucidating the last layer of the neural network. Attention, serving as a parameter of the upstream transformer, undergoes mapping to the input. This mapping process facilitates the capturing of not only the accuracy loss associated with downstream classification parameters but also the pronounced second part loss stemming from the parameters mapped onto the input. Consequently, the resulting explanation may not possess the desired level of intuitiveness. 
-
-**Therefore, even though BLADE's AI explanation method differs from the human-understandable attention heatmap, it is more precise.**
