@@ -26,8 +26,8 @@ But we manually analyzed some cases to demonstrate the accuracy.
 
 * Case No.1
   
-![Case1](https://github.com/anonymous0111118/De-duplication/assets/141200895/fcbfd409-1a01-4d63-90d4-a6ac9d26226d)
 
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/fcbfd409-1a01-4d63-90d4-a6ac9d26226d" alt="Case 3" width="300" height="300">
 
 The fundamental **root cause** of the bug, which was triggered by the execution of this program, stems from three key factors:
 1. Firstly, the definition of the structure itself, characterized by the presence of two integer member variables. 
