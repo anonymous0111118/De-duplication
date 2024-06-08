@@ -116,5 +116,7 @@ By scrutinizing the heatmap of **attention**, we can extract the following insig
 In summary, through a meticulous examination of attention patterns, the model discerns the failure-relevant semantics, which revolve around an uninitialized *char* type variable occupying the address of a global pointer that points to another modified value. These findings align remarkably well with the root cause, thereby substantiating the model's exceptional capability to elucidate failure-relevant semantics.
 
 ### Wasted effort in all four datasets
+We extend Table 2 in our paper to all four datasets.
+![image](https://github.com/anonymous0111118/De-duplication/assets/141200895/74e4d924-7371-4f85-92c6-b205acd48714)
 
 
