@@ -13,6 +13,7 @@ In general, BLADE consists of three main components as shown in the figure :
 
 ## Data Preparation
 We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) and put it in the folder './data'.
+Additionally, the corresponding bug version of every failure-triggering test program is showed in file {compiler_version}-bugs.txt.
 ## Auxiliary Classification
 
 Run the following command to get the fine-tuned auxiliary classification model. 
