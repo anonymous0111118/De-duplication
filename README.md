@@ -9,7 +9,8 @@ Before that you can log in to [Hugging Face](https://huggingface.co/) to choose 
 
 Note that we have released the parameters of the classification model trained on all four datasets. If you want to skip the training phase, you can use the parameters we trained directly. You can find them at [model](https://drive.google.com/drive/folders/1KAiOzVI-XmD_POtJa6xANr702DFNYos3?usp=sharing).
 # Feature Extraction
-Run get_distance.py to get the distance matrix.
+Run
+```$ python get_distance.py``` to get the distance matrix.
 
 We have re-implement the other four techniques based on our four datasets. If you want to skip this step, in directory 'distances', you can find the distance matrixs on four datasets and calculcated by five techniques : 'BLADE', 'Tamer', 'Trans', 'D3', 'D3-prog' with their numpy files.
 
