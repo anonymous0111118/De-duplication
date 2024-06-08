@@ -55,7 +55,7 @@ In essence, through the meticulous analysis of attention patterns, the model com
 
 * Case No.2
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/63ebc5e6-0dfb-4259-a460-1e9f18ab72b2" alt="Case 3" width="300" height="300">
+<img src="./data/case2.png" alt="Case 3" width="300" height="300">
 
 
 This example triggers the same bug as case 1, and the **root cause** of the bug was identical in both cases.
@@ -63,7 +63,7 @@ This example triggers the same bug as case 1, and the **root cause** of the bug 
 Furthermore, by examining the heatmap of **attention**, it becomes evident that the model assigns a similar level of attention to this example as it did to case 1. This suggests that the model recognizes the shared patterns and relevance between the two cases, reinforcing the consistency of its attention mechanism.
 
 * Case No.3
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/20bc675b-6d09-4e22-aa20-085305a014fb" alt="Case 4" width="300" height="300">
+<img src="./data/case3.png" alt="Case 4" width="300" height="300">
 
 First and foremost, to ensure clarity of understanding, it is imperative to acknowledge a prerequisite knowledge in the realm of the C language. By default, the *char* type is considered *signed* within this language. Consequently, when comparing a *char* type with an *unsigned char* type, implicit conversion takes place, wherein the *unsigned char* is converted to a *char*.
 
@@ -87,7 +87,7 @@ Regarding the heatmap changes in **attention**, it is evident that:
 To summarize, a comprehensive analysis of attention reveals the failure-relevant semantics discerned by the model. Specifically, it identifies the disparity that arises when comparing an unsigned char type variable, surpassing the value of *127*, with a char type variable, while incorporating the presence of at least one of them as const. Notably, this discrepancy manifests differently across various optimization levels. This alignment between attention patterns and the underlying root cause substantiates the efficacy of the failure-relevant semantics extracted by BLADE, thus providing compelling evidence in support of its effectiveness.
 
 * Case No.4
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/6ecdf7e2-c55c-49f8-ad10-eb983de8cfb0" alt="Case 4" width="300" height="300">
+<img src="./data/case4.png" alt="Case 4" width="300" height="300">
 
 It was determined that this example encountered the same bug as case 3, with the **root cause** being identical.
 
@@ -97,7 +97,7 @@ Despite the *if-statements* in this program, its logical structure aligns with t
 * Case No.5
 
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/2cd5e487-a07c-4a09-b11c-4122258c7616" alt="Case 2" width="500" height="500">
+<img src="./data/case5.png" alt="Case 2" width="500" height="500">
 
 Let us embark on the analysis of a more intricate example. The bug triggered by this program can be traced back to its **root cause**, which consists of the following elements:
 1. The presence of two char type pointers, *c* and *e*, alongside a general pointer, *d*.
