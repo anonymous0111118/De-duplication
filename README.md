@@ -33,8 +33,10 @@ We have re-implement the other four techniques based on our four datasets. If yo
 
 
 ## Test Program Prioritization
-Run 
-```$ python prioritization.py``` to get the final result.
+Run the following command to get the final result.
+``` shell
+$ python prioritization.py
+``` 
 
 The figures will be saved and you can check it.
 
