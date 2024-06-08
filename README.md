@@ -4,7 +4,11 @@ This is the implementation of BLADE (Enhancing Silent Compiler Bug De-duplicatio
 <img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/ecf5966f-ff49-40fa-ad2c-85a01c545169" alt="Overview of BLADE">
 
 ## Introduction
+The compiler bug duplication problem (where many test failures are caused by the same compiler bug) can lead to huge waste of time and resource in diagnosing test failures produced by compiler testing. It is particularly challenging with regard to the silent compiler bugs that do not produce any error messages. We propose a new method named BLADE for solving silent compiler bugs de-duplication problem in a black-box manner.
 
+In general, BLADE consists of three main components as shown in the figure : 
+- failure-relevant semantic information learning, which employs intermediate representation learning to learn failure-relevant semantic information by determining an auxiliary objective for fine-tuning the pre-trained code representation model.
+- 
 ## Data Preparation
 We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) 
 ## Auxiliary Classification
