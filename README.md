@@ -1,5 +1,9 @@
 # De-duplication
 This is the implementation of BLADE (Enhancing Silent Compiler Bug De-duplication via Deep Semantic Analysis).
+
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/ecf5966f-ff49-40fa-ad2c-85a01c545169" alt="Overview of BLADE">
+## Introduction
+
 ## Data Preparation
 We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) 
 ## Auxiliary Classification
