@@ -52,7 +52,7 @@ In essence, through the meticulous analysis of attention patterns, the model com
 
 * Case No.2
 
-<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/36d243db-8d24-444d-bc99-214ed6b1fee2" alt="Case 3" width="300" height="300">
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/63ebc5e6-0dfb-4259-a460-1e9f18ab72b2" alt="Case 3" width="300" height="300">
 
 
 This example triggers the same bug as case 1, and the **root cause** of the bug was identical in both cases.
