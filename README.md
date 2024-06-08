@@ -117,6 +117,8 @@ In summary, through a meticulous examination of attention patterns, the model di
 
 ### Wasted effort in all four datasets
 We extend Table 2 in our paper to all four datasets.
-![image](https://github.com/anonymous0111118/De-duplication/assets/141200895/74e4d924-7371-4f85-92c6-b205acd48714)
+
+<img src="https://github.com/anonymous0111118/De-duplication/assets/141200895/74e4d924-7371-4f85-92c6-b205acd48714" alt="Case 2">
+<!-- ![image](https://github.com/anonymous0111118/De-duplication/assets/141200895/74e4d924-7371-4f85-92c6-b205acd48714) -->
 
 
