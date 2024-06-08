@@ -12,7 +12,7 @@ In general, BLADE consists of three main components as shown in the figure :
 - failure-triggering test program prioritization, which adopts the FPF algorithm to prioritize the given set of failure-trigging test programs to be de-duplicated according to thei failure-relevant semantic information.
 
 ## Data Preparation
-We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) 
+We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) and put it in the folder './data'.
 ## Auxiliary Classification
 Run 
 ```$ python classification.py``` to get the trained classification model.
