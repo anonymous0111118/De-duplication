@@ -8,7 +8,9 @@ The compiler bug duplication problem (where many test failures are caused by the
 
 In general, BLADE consists of three main components as shown in the figure : 
 - failure-relevant semantic information learning, which employs intermediate representation learning to learn failure-relevant semantic information by determining an auxiliary objective for fine-tuning the pre-trained code representation model.
-- 
+- failure-relevant semantic information extraction, which empolys a model interpretation method to extract vectorized representations from the fine-tuned model as failure-relevant semantic information for de-duplication.
+- failure-triggering test program prioritization, which adopts the FPF algorithm to prioritize the given set of failure-trigging test programs to be de-duplicated according to thei failure-relevant semantic information.
+
 ## Data Preparation
 We have released our failure-triggering test programs and transformed failure-free ones data at [data.zip](https://drive.google.com/file/d/1bkSBTMpuV5_5wdpzJshcHKvOjSsKsLjw/view?usp=drive_link) 
 ## Auxiliary Classification
