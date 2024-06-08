@@ -14,7 +14,9 @@ We have re-implement the other four techniques based on our four datasets. If yo
 
 
 # Prioritization
-Run prioritization.py to get the final result.
+Run 
+```python prioritization.py```
+prioritization.py to get the final result.
 
 The figures will be saved and you can check it.
 
