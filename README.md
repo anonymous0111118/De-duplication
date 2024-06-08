@@ -22,7 +22,7 @@ Run
 The figures will be saved and you can check it.
 
 ## Additional results
-### Measure effectiveness in capturing causal relationships.
+### Measuring effectiveness in capturing causal relationships.
 It's hard to directly measure the accuracy of captured causal relationships, since the root causes of bugs are described in natural languages within bug reports while the failure-relevant features extracted from test programs are represented as semantic vectors (typical outputs of code representation models). There is no automatic methods measuring their matching degrees. 
 But we manually analyzed some cases to demonstrate the accuracy.
 
@@ -115,6 +115,6 @@ By scrutinizing the heatmap of **attention**, we can extract the following insig
 
 In summary, through a meticulous examination of attention patterns, the model discerns the failure-relevant semantics, which revolve around an uninitialized *char* type variable occupying the address of a global pointer that points to another modified value. These findings align remarkably well with the root cause, thereby substantiating the model's exceptional capability to elucidate failure-relevant semantics.
 
-
+### Wasted effort in all four datasets
 
 
