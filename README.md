@@ -21,7 +21,7 @@ Run the following command to get the fine-tuned auxiliary classification model.
 $ python classification.py
 ```
 
-Before that you can log in to [Hugging Face](https://huggingface.co/) to choose a pre-trained code representation model that you prefer. We use UniXCoder.
+Before that you can log in to [Hugging Face](https://huggingface.co/) to choose a pre-trained code representation model that you prefer and download. We use [UniXCoder](https://huggingface.co/microsoft/unixcoder-base).
 
 Note that we have released the parameters of the classification model trained on all four datasets. If you want to skip the training phase, you can use the parameters we trained directly. You can find them at [model](https://drive.google.com/drive/folders/1KAiOzVI-XmD_POtJa6xANr702DFNYos3?usp=sharing).
 ## Failure-relevant Semantic Information Extraction
